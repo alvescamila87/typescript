@@ -4,7 +4,7 @@ function showMessages(message: string): void {
     return message
 }
 
-// inferido automaticamente o void quando a função não tem retorno
+// o void é inferido automaticamente quando a função não tem retorno
 function showMessages(message: string) {
     console.log(message)
 }
