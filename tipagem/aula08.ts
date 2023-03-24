@@ -22,3 +22,18 @@ type User = {
 const newUser: User;
 newUser.name
 newUser.age
+
+//opcional:
+
+type User = {
+    name: string
+    email: string
+    age: number
+    isAdmin?: boolean // opcional
+}
+
+let newUser: User = {
+    name: "Camila"
+    email: "camila@gmail.com"
+    age: 35
+}
