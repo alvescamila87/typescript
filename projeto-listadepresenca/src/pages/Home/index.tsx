@@ -2,13 +2,23 @@ import React, { useState, useEffect } from 'react';
 
 import './style.css'
 
-import { Card } from '../../components/Card'
+import { Card, CardProps } from '../../components/Card'
+
+type ProfileResponse = {
+  name: string
+  avatar_url: string
+}
+
+type User = {
+  name: string
+  avatar: string
+}
 
 export function Home() {
 
   const [studentName, setStudentName] = useState('')
-  const [students, setStudents] = useState([])
-  const [user, setUser] = useState({name: '', avatar: '' })
+  const [students, setStudents] = useState<CardProps[]>([])
+  const [user, setUser] = useState<User>({} as User)
 
   // criando estudante
   function handleAddStudent() {
@@ -26,17 +36,19 @@ export function Home() {
   }
 
   useEffect(() => {
-    fetch('https://api.github.com/users/alvescamila87')
-    .then(response => response.json())
-    .then(data => { 
+    async function fetchData() {
+      const response = await fetch ('https://api.github.com/users/alvescamila87');
+      const data = await response.json() as ProfileResponse;
+   
       setUser({
         name: data.name,
         avatar: data.avatar_url,
       })
-    })
-    .catch(error => console.error(error))
+    }
+
+    fetchData();
   }, []);
- 
+
   return (
     <div className='container'>
       <header>
